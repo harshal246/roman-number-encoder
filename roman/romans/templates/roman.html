@@ -1,0 +1,42 @@
+{%load static %}
+{%load filter %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROMAN NUMBERS</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <p class="header">Roman Number Encoder</p>
+    <form method="post" action=".">
+        {% csrf_token %}
+        <hr>
+        <div class="container">
+            <input type="text" placeholder="Enter Number" class="input1" name="num">
+        </div>
+        <div class="container2">
+            <button class="input2">Generate</button>
+        </div>
+        {% for message in messages %}
+            {% if message == "sorry" %}
+                <p class="limits">Roman numbers limit is < 4000</p>
+            {% elif message == "string" %}
+                <p>string is found in your input</p>
+            {% elif message|types %}
+                <div class="outer">
+                    <div class="inner">
+                        <p class="output">{{ message }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+    </form>
+</body>
+
+</html>
